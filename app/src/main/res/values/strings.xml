@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">個人情報管理ツール</string>
+    <string name="button">Button</string>
+    <string name="button2">データ表示</string>
+    <string name="登録">登録</string>
+    <string name="button3">データ削除</string>
+    <string name="regist">登録</string>
+    <string name="button4">データ変更</string>
+    <string name="button5">終了</string>
+    <string name="mainmenu">メインメニュー</string>
+    <string name="returnbutton">returnButton</string>
+    <string name="return_button">戻る</string>
+    <string name="name">氏名</string>
+    <string name="number">登録番号</string>
+    <string name="add">住所</string>
+    <string name="tel">携帯電話番号</string>
+    <string name="region">常駐客先所属部署名</string>
+    <string name="at">登録日/時間</string>
+    <string name="view">データ表示</string>
+    <string name="delete">データ削除</string>
+    <string name="rewrite">データ変更</string>
+</resources>
