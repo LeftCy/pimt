@@ -19,5 +19,6 @@ public class DeleteActivity extends AppCompatActivity {
 
     public void delete(View view) {
         //None
+        //git Mac
     }
 }
