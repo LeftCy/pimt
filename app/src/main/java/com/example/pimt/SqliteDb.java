@@ -43,6 +43,7 @@ public class SqliteDb extends SQLiteOpenHelper {
                 "'ひじり野南３－１－９－１'," +
                 "'090-3333-3333'," +
                 "'ユニバーサルコンピューター')" );
+        //fa
     }
 
     @Override
