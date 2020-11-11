@@ -12,10 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 public class RegistActivity extends AppCompatActivity {
 
     //DBの宣言
-    SQLiteDatabase sqLiteDatabase;
+    SQLiteDatabase db;
 
     //自作したクラス
-    MyDBHelper myDBHelper;
+    //MyDBHelper myDBHelper;
 
     //EditTextから入力された文字、数字を受け取るために変数を宣言
     EditText number;
@@ -30,6 +30,7 @@ public class RegistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.regist_layout);
 
+        /*
         //変数へ代入
         number = (EditText)findViewById(R.id.editText_number);
         name = (EditText)findViewById(R.id.editText_name);
@@ -53,32 +54,39 @@ public class RegistActivity extends AppCompatActivity {
 
          */
 
+
         //戻るボタンの処理
         Button returnButton = findViewById(R.id.return_button);
         returnButton.setOnClickListener(v -> finish());
 
     }
 
-    public void write(View view) {
+    public void write() {
+
         //EditTextから入力されたデータの読み取り
-        String getNumber = number.getText().toString();
+        //String getNumber = number.getText().toString();
         String getName = name.getText().toString();
         String getAdd = add.getText().toString();
         String getTel = tel.getText().toString();
         String getRegion = region.getText().toString();
         String getCreatedAt = created_at.getText().toString();
 
+        /*
         //SQL文
         String sql =
                 "insert into pimt_db"
                 + "(name, address, tel, customer_signature, created_at)"
-                + "values('" + name + "',"
-                + add
-                + tel
-                + region
-                + created_at
+                + "values('" + getName + "',"
+                + getAdd
+                + getTel
+                + getRegion
+                + getCreatedAt
                 + ")";
-        sqLiteDatabase.execSQL(sql);
+        db.execSQL(sql);
+
+         */
+
+        System.out.println(getName + getAdd + getTel + getRegion + getCreatedAt);
 
         //挿入完了を通知するためのトースト
         Toast.makeText(this, "登録しました！", Toast.LENGTH_SHORT).show();

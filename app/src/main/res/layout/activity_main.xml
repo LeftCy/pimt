@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/numbers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -19,6 +19,7 @@
         tools:ignore="HardcodedText" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="230dp"
         android:layout_height="498dp"
         android:layout_marginStart="81dp"
@@ -29,15 +30,15 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/numbers">
 
         <Button
             android:id="@+id/regist_button"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:layout_weight="10"
             android:onClick="regist"
             android:text="@string/regist" />
 
@@ -45,9 +46,9 @@
             android:id="@+id/werite_button"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:layout_weight="10"
             android:onClick="view"
             android:text="@string/button2" />
 
@@ -55,9 +56,9 @@
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:layout_weight="10"
             android:onClick="delete"
             android:text="@string/button3" />
 
@@ -65,9 +66,9 @@
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:layout_weight="10"
             android:onClick="rewrite"
             android:text="@string/button4" />
 
@@ -75,9 +76,9 @@
             android:id="@+id/exit_button"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:layout_weight="10"
             android:onClick="exit"
             android:text="@string/button5" />
     </LinearLayout>
@@ -97,4 +98,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

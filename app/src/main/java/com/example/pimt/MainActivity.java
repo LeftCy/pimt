@@ -1,25 +1,65 @@
 package com.example.pimt;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+    //データベースの宣言
+    SQLiteDatabase sqliteDatabase;
+
+    //自作したクラス（SQLiteOpenHelperを継承しているクラス)
+    MyDBHelper myDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //変数へ代入
-        /*
-        editText1 = (EditText)findViewById(R.id.)
+        //データベースヘルパーの生成
+        //２番目の引数はデータベースの名前
+        myDBHelper = new MyDBHelper(this, "pimt_db", null, 1);
+        //データベースの生成
+        sqliteDatabase = myDBHelper.getWritableDatabase();
 
-         */
+        Toast.makeText(this, "DB作成＆テストデータ書き込み", Toast.LENGTH_SHORT).show();
 
-        System.out.println("Hello World!");
+
+        TextView number = findViewById(R.id.numbers);
+        number.setText("現在の登録件数:" + read() + "件");
+    }
+
+    //登録数の読み込み
+    public String read() {
+        //このクラスで利用するため
+        //データベースヘルパー（SQLiteOpenHelper）のインスタンスを作成
+        MyDBHelper myDBHelper = new MyDBHelper(this, "pimt_db", null, 1);
+        //getWritebleDatabaseメソッドでSQLiteDatabase型の変数に代入
+        SQLiteDatabase sqliteDatabase = myDBHelper.getWritableDatabase();
+
+        //カーソルの宣言
+        Cursor c = null;
+
+        //データベースへの問い合わせ
+        String sql = "select count(*) from users";
+
+        c = sqliteDatabase.rawQuery(sql, null);
+
+        c.moveToFirst();
+
+        String data = c.getString(0);
+
+        return data;
 
     }
 
