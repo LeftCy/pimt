@@ -44,6 +44,6 @@ public class MyDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-
+        // TODO 自動生成されたメソッド・スタブ
     }
 }
