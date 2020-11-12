@@ -26,14 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //データベースヘルパーの生成
-        //２番目の引数はデータベースの名前
-        myDBHelper = new MyDBHelper(this, "pimt_db", null, 1);
-        //データベースの生成
-        sqliteDatabase = myDBHelper.getWritableDatabase();
-
-        Toast.makeText(this, "DB作成＆テストデータ書き込み", Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(this, "DB作成", Toast.LENGTH_SHORT).show();
 
         TextView number = findViewById(R.id.numbers);
         number.setText("現在の登録件数:" + read() + "件");
@@ -44,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         //このクラスで利用するため
         //データベースヘルパー（SQLiteOpenHelper）のインスタンスを作成
         MyDBHelper myDBHelper = new MyDBHelper(this, "pimt_db", null, 1);
-        //getWritebleDatabaseメソッドでSQLiteDatabase型の変数に代入
+        //getWritableDatabaseメソッドでSQLiteDatabase型の変数に代入
         SQLiteDatabase sqliteDatabase = myDBHelper.getWritableDatabase();
 
         //カーソルの宣言

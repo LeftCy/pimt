@@ -32,8 +32,8 @@
         android:id="@+id/textViewNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:text="@string/number"
         app:layout_constraintBottom_toTopOf="@+id/textViewName"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewRegion" />
 
     <EditText
-        android:id="@+id/editText_number3"
+        android:id="@+id/editText_numberView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -92,56 +92,56 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="None"
-        app:layout_constraintBottom_toTopOf="@+id/editText_name3"
-        app:layout_constraintEnd_toEndOf="@+id/editText_name3"
+        app:layout_constraintBottom_toTopOf="@+id/editText_nameView"
+        app:layout_constraintEnd_toEndOf="@+id/editText_nameView"
         app:layout_constraintTop_toBottomOf="@+id/header_rewrite" />
 
     <EditText
-        android:id="@+id/editText_name3"
+        android:id="@+id/editText_nameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editText_add3"
-        app:layout_constraintEnd_toEndOf="@+id/editText_add3"
-        app:layout_constraintTop_toBottomOf="@+id/editText_number3" />
+        app:layout_constraintBottom_toTopOf="@+id/editText_addView"
+        app:layout_constraintEnd_toEndOf="@+id/editText_addView"
+        app:layout_constraintTop_toBottomOf="@+id/editText_numberView" />
 
     <EditText
-        android:id="@+id/editText_add3"
+        android:id="@+id/editText_addView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editText_tel3"
-        app:layout_constraintEnd_toEndOf="@+id/editText_tel3"
-        app:layout_constraintTop_toBottomOf="@+id/editText_name3" />
+        app:layout_constraintBottom_toTopOf="@+id/editText_telView"
+        app:layout_constraintEnd_toEndOf="@+id/editText_telView"
+        app:layout_constraintTop_toBottomOf="@+id/editText_nameView" />
 
     <EditText
-        android:id="@+id/editText_tel3"
+        android:id="@+id/editText_telView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editText_region3"
-        app:layout_constraintEnd_toEndOf="@+id/editText_region3"
-        app:layout_constraintTop_toBottomOf="@+id/editText_add3" />
+        app:layout_constraintBottom_toTopOf="@+id/editText_regionView"
+        app:layout_constraintEnd_toEndOf="@+id/editText_regionView"
+        app:layout_constraintTop_toBottomOf="@+id/editText_addView" />
 
     <EditText
-        android:id="@+id/editText_region3"
+        android:id="@+id/editText_regionView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editText_at3"
-        app:layout_constraintEnd_toEndOf="@+id/editText_at3"
-        app:layout_constraintTop_toBottomOf="@+id/editText_tel3" />
+        app:layout_constraintBottom_toTopOf="@+id/editText_atView"
+        app:layout_constraintEnd_toEndOf="@+id/editText_atView"
+        app:layout_constraintTop_toBottomOf="@+id/editText_telView" />
 
     <EditText
-        android:id="@+id/editText_at3"
+        android:id="@+id/editText_atView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -151,7 +151,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textViewAt"
-        app:layout_constraintTop_toBottomOf="@+id/editText_region3" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_regionView" />
 
     <LinearLayout
         android:id="@+id/linearLayout6"

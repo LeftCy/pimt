@@ -30,6 +30,30 @@ public class RegistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.regist_layout);
 
+        //空き番号の取得
+
+
+        //SQLの作成
+        /*
+        String sqlTestData =
+                "insert into users (" +
+                        "name, " +
+                        "address, " +
+                        "tel, " +
+                        "customer_signature, " +
+                        "created_at )" +
+                        "values (" +
+                        "1, " +
+                        "'平井　嵩大'," +
+                        "'ひじり野南３－１－９－１'," +
+                        "'090-3333-3333'," +
+                        "'ユニバーサルコンピューター')";
+        db.execSQL(sqlTestData);
+
+         */
+
+
+
         /*
         //変数へ代入
         number = (EditText)findViewById(R.id.editText_number);
@@ -53,6 +77,8 @@ public class RegistActivity extends AppCompatActivity {
         });
 
          */
+
+
 
 
         //戻るボタンの処理
