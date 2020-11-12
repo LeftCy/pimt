@@ -1,5 +1,6 @@
 package com.example.pimt;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +15,7 @@ public class ViewActivity extends AppCompatActivity {
     private EditText inputNumber;
     private TextView textView;
 
-    //DBの宣言
-    SQLiteDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

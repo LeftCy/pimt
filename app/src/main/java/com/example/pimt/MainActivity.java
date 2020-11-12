@@ -33,24 +33,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //登録数の読み込み
-    public String read() {
-        //このクラスで利用するため
+    public int read() {
         //データベースヘルパー（SQLiteOpenHelper）のインスタンスを作成
         MyDBHelper myDBHelper = new MyDBHelper(this, "pimt_db", null, 1);
         //getWritableDatabaseメソッドでSQLiteDatabase型の変数に代入
         SQLiteDatabase sqliteDatabase = myDBHelper.getWritableDatabase();
 
         //カーソルの宣言
-        Cursor c = null;
+        Cursor c;
 
-        //データベースへの問い合わせ
+        //テーブル内のレコード数
         String sql = "select count(*) from users";
 
         c = sqliteDatabase.rawQuery(sql, null);
 
         c.moveToFirst();
 
-        String data = c.getString(0);
+        int data = c.getInt(0);
+
+        c.close();
 
         return data;
 

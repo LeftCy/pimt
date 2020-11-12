@@ -1,21 +1,27 @@
 package com.example.pimt;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class RegistActivity extends AppCompatActivity {
 
-    //DBの宣言
-    SQLiteDatabase db;
+    MyDBHelper myDBHelper;
+    SQLiteDatabase sqliteDatabase;
 
-    //自作したクラス
-    //MyDBHelper myDBHelper;
 
     //EditTextから入力された文字、数字を受け取るために変数を宣言
     EditText number;
@@ -30,60 +36,39 @@ public class RegistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.regist_layout);
 
-        //空き番号の取得
-
-
-        //SQLの作成
-        /*
-        String sqlTestData =
-                "insert into users (" +
-                        "name, " +
-                        "address, " +
-                        "tel, " +
-                        "customer_signature, " +
-                        "created_at )" +
-                        "values (" +
-                        "1, " +
-                        "'平井　嵩大'," +
-                        "'ひじり野南３－１－９－１'," +
-                        "'090-3333-3333'," +
-                        "'ユニバーサルコンピューター')";
-        db.execSQL(sqlTestData);
-
-         */
-
-
-
-        /*
-        //変数へ代入
-        number = (EditText)findViewById(R.id.editText_number);
-        name = (EditText)findViewById(R.id.editText_name);
-        add = (EditText)findViewById(R.id.editText_add);
-        tel = (EditText)findViewById(R.id.editText_tel);
-        region = (EditText)findViewById(R.id.editText_region);
-        created_at = (EditText)findViewById(R.id.editText_at);
-
-        //データベースヘルパーの生成
-        //２番目の引数はデータベースの名前
+        //データベースヘルパー（SQLiteOpenHelper）のインスタンスを作成
         myDBHelper = new MyDBHelper(this, "pimt_db", null, 1);
-        //データベースの生成
-        sqLiteDatabase = myDBHelper.getWritableDatabase();
+        //getWritableDatabaseメソッドでSQLiteDatabase型の変数に代入
+        sqliteDatabase = myDBHelper.getWritableDatabase();
 
-        //登録ボタンの処理
-        /*
-        Button registButton = findViewById(R.id.regist_button);
-        registButton.setOnClickListener(v -> {
-
-        });
-
-         */
+        //カーソルの宣言
+        Cursor c;
 
 
+        //空き番号のセット
+        String sql =
+                "select min(id + 1) as id "
+                        + "from users "
+                        + "where (id + 1) not in (select id from users)";
+
+        c = sqliteDatabase.rawQuery(sql, null);
+        c.moveToFirst();
+        //整数型で取得
+        int number = c.getInt(0);
+
+        //カーソルを閉じる
+        c.close();
+
+        TextView numberView = findViewById(R.id.editText_number);
+        numberView.setText(String.valueOf(number));
 
 
-        //戻るボタンの処理
-        Button returnButton = findViewById(R.id.return_button);
-        returnButton.setOnClickListener(v -> finish());
+        //現在時刻のセット
+        TextView atView = findViewById(R.id.editText_at);
+        atView.setText(getNowDate());
+
+
+
 
     }
 
@@ -97,26 +82,24 @@ public class RegistActivity extends AppCompatActivity {
         String getRegion = region.getText().toString();
         String getCreatedAt = created_at.getText().toString();
 
-        /*
-        //SQL文
-        String sql =
-                "insert into pimt_db"
-                + "(name, address, tel, customer_signature, created_at)"
-                + "values('" + getName + "',"
-                + getAdd
-                + getTel
-                + getRegion
-                + getCreatedAt
-                + ")";
-        db.execSQL(sql);
-
-         */
-
         System.out.println(getName + getAdd + getTel + getRegion + getCreatedAt);
 
         //挿入完了を通知するためのトースト
         Toast.makeText(this, "登録しました！", Toast.LENGTH_SHORT).show();
 
+        finish();
+    }
+
+    //現在時刻をString型で返すメソッド
+    public static String getNowDate() {
+
+        final DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        final Date date = new Date(System.currentTimeMillis());
+        return df.format(date);
+
+    }
+
+    public void returnButton(View view) {
         finish();
     }
 }
