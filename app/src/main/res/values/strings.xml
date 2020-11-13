@@ -20,5 +20,5 @@
     <string name="delete">データ削除</string>
     <string name="rewrite">データ変更</string>
     <string name="numberHint">numberHint</string>
-    <string name="hintNumber">登録番号を入力してください</string>
+    <string name="hintNumber">登録番号を入力</string>
 </resources>

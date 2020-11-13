@@ -4,14 +4,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,15 +18,6 @@ public class RegistActivity extends AppCompatActivity {
 
     MyDBHelper myDBHelper;
     SQLiteDatabase sqliteDatabase;
-
-
-    //EditTextから入力された文字、数字を受け取るために変数を宣言
-    EditText number;
-    EditText name;
-    EditText add;
-    EditText tel;
-    EditText region;
-    EditText created_at;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,22 +55,53 @@ public class RegistActivity extends AppCompatActivity {
         TextView atView = findViewById(R.id.editText_at);
         atView.setText(getNowDate());
 
-
-
-
     }
 
-    public void write() {
+    public void write(View view) {
 
+
+        //EditTextから入力された文字、数字を受け取るために変数を宣言
+        EditText editText_number = findViewById(R.id.editText_number);
+        EditText editText_name = findViewById(R.id.editText_name);
+        EditText editText_add = findViewById(R.id.editText_add);
+        EditText editText_tel = findViewById(R.id.editText_tel);
+        EditText editText_region = findViewById(R.id.editText_region);
+        EditText editText_at = findViewById(R.id.editText_at);
         //EditTextから入力されたデータの読み取り
-        //String getNumber = number.getText().toString();
-        String getName = name.getText().toString();
-        String getAdd = add.getText().toString();
-        String getTel = tel.getText().toString();
-        String getRegion = region.getText().toString();
-        String getCreatedAt = created_at.getText().toString();
+        String registNumber = editText_number.getText().toString();
+        String registName = editText_name.getText().toString();
+        String registAdd = editText_add.getText().toString();
+        String registTel = editText_tel.getText().toString();
+        String registRegion = editText_region.getText().toString();
+        String registAt = editText_at.getText().toString();
 
-        System.out.println(getName + getAdd + getTel + getRegion + getCreatedAt);
+        //for Debug
+        String inputs[] = {registNumber, registName, registAdd, registTel, registRegion, registAt};
+        for (int i = 0; i < inputs.length; i ++) {
+            System.out.println("入力値： " + inputs[i]);
+        }
+
+        //Insert to DB
+        //この動作に戻り値はない為、execSQL()が使用可能
+        //変数を生で叩き込まないこと(''で囲まないとエラーの原因になる)
+        String sql =
+                "insert into users (" +
+                "id," +
+                "name, " +
+                "address, " +
+                "tel, " +
+                "customer_signature, "+
+                "created_at) " +
+                "values (" +
+                registNumber + ", " +
+                "'" + registName + "'," +
+                "'" + registAdd + "'," +
+                "'" + registTel + "'," +
+                "'" + registRegion + "'," +
+                "'" + registAt + "'" +
+                ")";
+
+        sqliteDatabase.execSQL(sql);
 
         //挿入完了を通知するためのトースト
         Toast.makeText(this, "登録しました！", Toast.LENGTH_SHORT).show();
@@ -93,7 +112,7 @@ public class RegistActivity extends AppCompatActivity {
     //現在時刻をString型で返すメソッド
     public static String getNowDate() {
 
-        final DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        final DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         final Date date = new Date(System.currentTimeMillis());
         return df.format(date);
 

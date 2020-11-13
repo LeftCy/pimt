@@ -15,12 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    //データベースの宣言
-    SQLiteDatabase sqliteDatabase;
-
-    //自作したクラス（SQLiteOpenHelperを継承しているクラス)
-    MyDBHelper myDBHelper;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,22 +24,48 @@ public class MainActivity extends AppCompatActivity {
 
         TextView number = findViewById(R.id.numbers);
         number.setText("現在の登録件数:" + read() + "件");
+
+        debug();
+
     }
 
-    //登録数の読み込み
-    public int read() {
+    //for debug
+    public void debug() {
+
         //データベースヘルパー（SQLiteOpenHelper）のインスタンスを作成
         MyDBHelper myDBHelper = new MyDBHelper(this, "pimt_db", null, 1);
         //getWritableDatabaseメソッドでSQLiteDatabase型の変数に代入
         SQLiteDatabase sqliteDatabase = myDBHelper.getWritableDatabase();
 
-        //カーソルの宣言
-        Cursor c;
+        //デバッグ用
+        String select = "select created_at from users where id = 1";
+        Cursor c = sqliteDatabase.rawQuery(select, null);
+        c.moveToFirst();
+        String result = c.getString(0);
+        System.out.println("結果: " + result);
+
+
+        c.moveToNext();
+        System.out.println("結果: " + result);
+        c.close();
+
+
+
+    }
+
+    //登録数の読み込み
+    public int read() {
+
+        //データベースヘルパー（SQLiteOpenHelper）のインスタンスを作成
+        MyDBHelper myDBHelper = new MyDBHelper(this, "pimt_db", null, 1);
+        //getWritableDatabaseメソッドでSQLiteDatabase型の変数に代入
+        SQLiteDatabase sqliteDatabase = myDBHelper.getWritableDatabase();
 
         //テーブル内のレコード数
         String sql = "select count(*) from users";
 
-        c = sqliteDatabase.rawQuery(sql, null);
+        //カーソルの宣言
+        Cursor c = sqliteDatabase.rawQuery(sql, null);
 
         c.moveToFirst();
 
@@ -56,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         return data;
 
     }
+
+    //System.out.printlnでselect * from usersを表示するメソッド
 
     //登録ボタン
     public void regist(View view) {
