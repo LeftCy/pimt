@@ -49,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("結果: " + result);
         c.close();
 
-
-
     }
 
     //登録数の読み込み
