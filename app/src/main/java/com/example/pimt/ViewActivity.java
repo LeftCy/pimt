@@ -21,35 +21,53 @@ public class ViewActivity extends AppCompatActivity {
     }
 
     public void view(View view) {
+
         //入力番号の取得
         EditText editText_Number = findViewById(R.id.editText_numberView);
         String inputNumber = editText_Number.getText().toString();
 
-        //もし、入力されていたら。
-        //空白でないかどうかで判断
-        if (inputNumber != null) {
-            System.out.println("空白ではありません！: " + inputNumber);
-        } else {
-            System.out.println("空白です！: " + inputNumber);
-        }
+        System.out.println("入力値: " + inputNumber);
 
-        //データベースヘルパー（SQLiteOpenHelper）のインスタンスを作成
         MyDBHelper myDBHelper = new MyDBHelper(this, "pimt_db", null, 1);
-        //getWritableDatabaseメソッドでSQLiteDatabase型の変数に代入
         SQLiteDatabase sqliteDatabase = myDBHelper.getWritableDatabase();
 
         //sql文
-        String sql = "select * from user";
+        String sql = "select * from users where id = ?";
+        Cursor c = sqliteDatabase.rawQuery(sql, new String[] {inputNumber});
 
-        Cursor c = sqliteDatabase.rawQuery(sql, null);
+        while (c.moveToNext()) {
 
-        while(c.moveToNext()){
+            //宣言
+            TextView nameView = findViewById(R.id.editText_nameView);
+            TextView addView = findViewById(R.id.editText_addView);
+            TextView telView = findViewById(R.id.editText_telView);
+            TextView regionView = findViewById(R.id.editText_regionView);
+            TextView atView = findViewById(R.id.editText_atView);
+
+
             int index_id = c.getColumnIndex("id");
             int index_name = c.getColumnIndex("name");
+            int index_add = c.getColumnIndex("address");
+            int index_tel = c.getColumnIndex("tel");
+            int index_region = c.getColumnIndex("customer_signature");
+            int index_at = c.getColumnIndex("created_at");
             int id = c.getInt(index_id);
             String name = c.getString(index_name);
-            String result = "ID: " + id + " 名前:" +  name + "\n";
+            String add = c.getString(index_add);
+            String tel = c.getString(index_tel);
+            String region = c.getString(index_region);
+            String at = c.getString(index_at);
+            String result = "ID: " + id + " 名前: " +  name + " 住所: " + add + " でんわ: " + tel + " 所属: " + region + " 登録日: " + at + "\n";
+
             System.out.println(result);
+            System.out.println(index_id + index_name);
+
+            nameView.setText(name);
+            addView.setText(add);
+            telView.setText(tel);
+            regionView.setText(region);
+            atView.setText(at);
+
         }
 
 
