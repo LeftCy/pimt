@@ -1,5 +1,6 @@
 package com.example.pimt;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ViewActivity extends AppCompatActivity {
@@ -35,7 +37,7 @@ public class ViewActivity extends AppCompatActivity {
         String sql = "select * from users where id = ?";
         Cursor c = sqliteDatabase.rawQuery(sql, new String[] {inputNumber});
 
-        while (c.moveToNext()) {
+        if (c.moveToNext()) {
 
             //宣言
             TextView nameView = findViewById(R.id.editText_nameView);
@@ -60,7 +62,6 @@ public class ViewActivity extends AppCompatActivity {
             String result = "ID: " + id + " 名前: " +  name + " 住所: " + add + " でんわ: " + tel + " 所属: " + region + " 登録日: " + at + "\n";
 
             System.out.println(result);
-            System.out.println(index_id + index_name);
 
             nameView.setText(name);
             addView.setText(add);
@@ -68,9 +69,35 @@ public class ViewActivity extends AppCompatActivity {
             regionView.setText(region);
             atView.setText(at);
 
+        } else {
+
+            //宣言
+            TextView nameView = findViewById(R.id.editText_nameView);
+            TextView addView = findViewById(R.id.editText_addView);
+            TextView telView = findViewById(R.id.editText_telView);
+            TextView regionView = findViewById(R.id.editText_regionView);
+            TextView atView = findViewById(R.id.editText_atView);
+
+            nameView.setText("");
+            addView.setText("");
+            telView.setText("");
+            regionView.setText("");
+            atView.setText("");
+
+            //ダイアログを表示
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder
+                    .setTitle("エラー")
+                    .setMessage("正しい登録番号を入力してください")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //
+                        }
+                    });
+            builder.show();
+
         }
-
-
     }
 
     public void returnButton(View view) {

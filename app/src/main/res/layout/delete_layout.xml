@@ -103,6 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:focusable="false"
         android:gravity="center"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editText_addView"
@@ -115,6 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:focusable="false"
         android:gravity="center"
         android:inputType="textPostalAddress"
         app:layout_constraintBottom_toTopOf="@+id/editText_telView"
@@ -127,6 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:focusable="false"
         android:gravity="center"
         android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@+id/editText_regionView"
@@ -139,6 +142,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:focusable="false"
         android:gravity="center"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/editText_atView"
@@ -151,6 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:focusable="false"
         android:gravity="center"
         android:inputType="datetime"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
@@ -179,6 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
+            android:onClick="returnButton"
             android:text="@string/return_button" />
 
         <Button
@@ -187,7 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:onClick="view"
+            android:onClick="delete"
             android:text="@string/delete" />
 
     </LinearLayout>

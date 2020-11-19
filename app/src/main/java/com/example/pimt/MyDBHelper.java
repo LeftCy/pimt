@@ -31,6 +31,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
                 "created_at timestamp )";
         db.execSQL(sql);
 
+        /*
         //usersテーブルへの書き込み
         String sqlTestData =
                 "insert into users (" +
@@ -43,14 +44,15 @@ public class MyDBHelper extends SQLiteOpenHelper {
                         ") " +
                         "values (" +
                         "1, " +
-                        "'平井　嵩大', " +
-                        "'ひじり野南３－１－９－１', " +
+                        "'平井　TEST', " +
+                        "'北海道', " +
                         "'090-3333-3333', " +
-                        "'ユニバーサルコンピューター', " +
+                        "'会社A', " +
                         "'" + getNowDate() + "'" +
                         ")";
         db.execSQL(sqlTestData);
 
+         */
 
 
     }

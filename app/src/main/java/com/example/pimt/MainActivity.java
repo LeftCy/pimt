@@ -20,21 +20,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toast.makeText(this, "DB作成", Toast.LENGTH_SHORT).show();
-
         TextView number = findViewById(R.id.numbers);
         number.setText("現在の登録件数:" + read() + "件");
 
-        debug();
+        //debug();
 
     }
 
     //for debug
     public void debug() {
 
-        //データベースヘルパー（SQLiteOpenHelper）のインスタンスを作成
         MyDBHelper myDBHelper = new MyDBHelper(this, "pimt_db", null, 1);
-        //getWritableDatabaseメソッドでSQLiteDatabase型の変数に代入
         SQLiteDatabase sqliteDatabase = myDBHelper.getWritableDatabase();
 
         //デバッグ用
