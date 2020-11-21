@@ -30,26 +30,43 @@ public class RewriteActivity extends AppCompatActivity {
     }
 
     public void rewrite(View view) {
-        //ダイアログを表示
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder
-                .setTitle("確認")
-                .setMessage("登録情報を変更しますか？")
-                .setPositiveButton("変更", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
 
-                        rewriteDo();
+        if (isEmpty()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder
+                    .setTitle("エラー")
+                    .setMessage("入力していない箇所があります！")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //
+                        }
+                    });
+            builder.show();
+        } else {
 
-                    }
-                })
-                .setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //キャンセル時
-                    }
-                });
-        builder.show();
+            //ダイアログを表示
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder
+                    .setTitle("確認")
+                    .setMessage("登録情報を変更しますか？")
+                    .setPositiveButton("変更", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //変更時
+                            rewriteDo();
+
+                        }
+                    })
+                    .setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //キャンセル時
+                        }
+                    });
+            builder.show();
+        }
+
     }
 
     public void rewriteDo() {
@@ -135,18 +152,8 @@ public class RewriteActivity extends AppCompatActivity {
 
         } else {
 
-            //宣言
-            TextView nameView = findViewById(R.id.editText_nameView);
-            TextView addView = findViewById(R.id.editText_addView);
-            TextView telView = findViewById(R.id.editText_telView);
-            TextView regionView = findViewById(R.id.editText_regionView);
-            TextView atView = findViewById(R.id.editText_atView);
-
-            nameView.setText("");
-            addView.setText("");
-            telView.setText("");
-            regionView.setText("");
-            atView.setText("");
+            TextView numberView = findViewById(R.id.editText_numberView);
+            numberView.setText("");
 
             //ダイアログを表示
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -162,6 +169,38 @@ public class RewriteActivity extends AppCompatActivity {
             builder.show();
 
         }
+    }
+
+    public boolean isEmpty() {
+        boolean empty = false;
+
+        EditText editText_number = findViewById(R.id.editText_numberView);
+        EditText editText_name = findViewById(R.id.editText_nameView);
+        EditText editText_add = findViewById(R.id.editText_addView);
+        EditText editText_tel = findViewById(R.id.editText_telView);
+        EditText editText_region = findViewById(R.id.editText_regionView);
+        EditText editText_at = findViewById(R.id.editText_atView);
+
+        String rewriteNumber = editText_number.getText().toString();
+        String rewriteName = editText_name.getText().toString();
+        String rewriteAdd = editText_add.getText().toString();
+        String rewriteTel = editText_tel.getText().toString();
+        String rewriteRegion = editText_region.getText().toString();
+        String rewriteAt = editText_at.getText().toString();
+
+        //入力値が空だった場合
+        if (
+                rewriteNumber.toString().isEmpty() ||
+                rewriteName.toString().isEmpty() ||
+                rewriteAdd.toString().isEmpty() ||
+                rewriteTel.toString().isEmpty() ||
+                rewriteRegion.toString().isEmpty() ||
+                rewriteAt.toString().isEmpty()
+        ) {
+            empty = true;
+        }
+
+        return empty;
     }
 
     public void returnButton(View view) {

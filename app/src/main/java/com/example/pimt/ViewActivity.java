@@ -37,8 +37,19 @@ public class ViewActivity extends AppCompatActivity {
         String sql = "select * from users where id = ?";
         Cursor c = sqliteDatabase.rawQuery(sql, new String[] {inputNumber});
 
-        if (c.moveToNext()) {
-
+        if (isEmpty()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder
+                    .setTitle("エラー")
+                    .setMessage("登録番号を入力してください！")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //
+                        }
+                    });
+            builder.show();
+        } else if (c.moveToNext()) {
             //宣言
             TextView nameView = findViewById(R.id.editText_nameView);
             TextView addView = findViewById(R.id.editText_addView);
@@ -96,8 +107,22 @@ public class ViewActivity extends AppCompatActivity {
                         }
                     });
             builder.show();
-
         }
+
+
+    }
+
+    public boolean isEmpty() {
+        boolean empty = false;
+
+        EditText editText_number = findViewById(R.id.editText_numberView);
+        String viewNumber = editText_number.getText().toString();
+
+        if (viewNumber.toString().isEmpty()) {
+            empty = true;
+        }
+
+        return empty;
     }
 
     public void returnButton(View view) {

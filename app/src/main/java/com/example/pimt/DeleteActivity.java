@@ -61,8 +61,19 @@ public class DeleteActivity extends AppCompatActivity {
         String sql = "select * from users where id = ?";
         Cursor c = sqliteDatabase.rawQuery(sql, new String[] {inputNumber});
 
-        if (c.moveToNext()) {
-
+        if (isEmpty()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder
+                    .setTitle("エラー")
+                    .setMessage("登録番号を入力してください！")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //
+                        }
+                    });
+            builder.show();
+        } else if (c.moveToNext()) {
             //宣言
             TextView nameView = findViewById(R.id.editText_nameView);
             TextView addView = findViewById(R.id.editText_addView);
@@ -94,7 +105,19 @@ public class DeleteActivity extends AppCompatActivity {
             atView.setText(at);
 
         } else {
-            initialize();
+
+            //宣言
+            TextView nameView = findViewById(R.id.editText_nameView);
+            TextView addView = findViewById(R.id.editText_addView);
+            TextView telView = findViewById(R.id.editText_telView);
+            TextView regionView = findViewById(R.id.editText_regionView);
+            TextView atView = findViewById(R.id.editText_atView);
+
+            nameView.setText("");
+            addView.setText("");
+            telView.setText("");
+            regionView.setText("");
+            atView.setText("");
 
             //ダイアログを表示
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -108,18 +131,34 @@ public class DeleteActivity extends AppCompatActivity {
                         }
                     });
             builder.show();
-
         }
+
+
+    }
+
+    public boolean isEmpty() {
+        boolean empty = false;
+
+        EditText editText_number = findViewById(R.id.editText_numberView);
+        String viewNumber = editText_number.getText().toString();
+
+        if (viewNumber.toString().isEmpty()) {
+            empty = true;
+        }
+
+        return empty;
     }
 
     public void initialize() {
         //EditTextの初期化
+        TextView numberView = findViewById(R.id.editText_numberView);
         TextView nameView = findViewById(R.id.editText_nameView);
         TextView addView = findViewById(R.id.editText_addView);
         TextView telView = findViewById(R.id.editText_telView);
         TextView regionView = findViewById(R.id.editText_regionView);
         TextView atView = findViewById(R.id.editText_atView);
 
+        numberView.setText("");
         nameView.setText("");
         addView.setText("");
         telView.setText("");
@@ -140,7 +179,7 @@ public class DeleteActivity extends AppCompatActivity {
         initialize();
         TextView numberView = findViewById(R.id.editText_nameView);
         numberView.setText("");
-        //Toast.makeText(this, "削除が完了しました", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "削除が完了しました", Toast.LENGTH_LONG).show();
 
     }
 

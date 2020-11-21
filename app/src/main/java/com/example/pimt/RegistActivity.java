@@ -1,5 +1,6 @@
 package com.example.pimt;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DateFormat;
@@ -59,55 +61,70 @@ public class RegistActivity extends AppCompatActivity {
 
     public void write(View view) {
 
-        isEmpty();
+        if (isEmpty()) {
+            System.out.println("入力値が空白であった場合のダイアログを表示する処理を書くこと");
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder
+                    .setTitle("エラー")
+                    .setMessage("入力していない箇所があります！")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //
+                        }
+                    });
+            builder.show();
+        } else {
+            System.out.println("DBへの書き込み処理");
+            //EditTextから入力された文字、数字を受け取るために変数を宣言
+            EditText editText_number = findViewById(R.id.editText_number);
+            EditText editText_name = findViewById(R.id.editText_name);
+            EditText editText_add = findViewById(R.id.editText_add);
+            EditText editText_tel = findViewById(R.id.editText_tel);
+            EditText editText_region = findViewById(R.id.editText_region);
+            EditText editText_at = findViewById(R.id.editText_at);
+            //EditTextから入力されたデータの読み取り
+            String registNumber = editText_number.getText().toString();
+            String registName = editText_name.getText().toString();
+            String registAdd = editText_add.getText().toString();
+            String registTel = editText_tel.getText().toString();
+            String registRegion = editText_region.getText().toString();
+            String registAt = editText_at.getText().toString();
 
-        //EditTextから入力された文字、数字を受け取るために変数を宣言
-        EditText editText_number = findViewById(R.id.editText_number);
-        EditText editText_name = findViewById(R.id.editText_name);
-        EditText editText_add = findViewById(R.id.editText_add);
-        EditText editText_tel = findViewById(R.id.editText_tel);
-        EditText editText_region = findViewById(R.id.editText_region);
-        EditText editText_at = findViewById(R.id.editText_at);
-        //EditTextから入力されたデータの読み取り
-        String registNumber = editText_number.getText().toString();
-        String registName = editText_name.getText().toString();
-        String registAdd = editText_add.getText().toString();
-        String registTel = editText_tel.getText().toString();
-        String registRegion = editText_region.getText().toString();
-        String registAt = editText_at.getText().toString();
+            //for Debug
+            String inputs[] = {registNumber, registName, registAdd, registTel, registRegion, registAt};
+            for (int i = 0; i < inputs.length; i ++) {
+                System.out.println("入力値： " + inputs[i]);
+            }
 
-        //for Debug
-        String inputs[] = {registNumber, registName, registAdd, registTel, registRegion, registAt};
-        for (int i = 0; i < inputs.length; i ++) {
-            System.out.println("入力値： " + inputs[i]);
+            //Insert to DB
+            //この動作に戻り値はない為、execSQL()が使用可能
+            //変数を生で叩き込まないこと(''で囲まないとエラーの原因になる)
+            String sql =
+                    "insert into users (" +
+                            "id," +
+                            "name, " +
+                            "address, " +
+                            "tel, " +
+                            "customer_signature, "+
+                            "created_at) " +
+                            "values (" +
+                            registNumber + ", " +
+                            "'" + registName + "'," +
+                            "'" + registAdd + "'," +
+                            "'" + registTel + "'," +
+                            "'" + registRegion + "'," +
+                            "'" + registAt + "'" +
+                            ")";
+
+            sqliteDatabase.execSQL(sql);
+
+            finish();
+
+            //挿入完了を通知するためのトースト
+            Toast.makeText(this, "登録しました！", Toast.LENGTH_SHORT).show();
         }
 
-        //Insert to DB
-        //この動作に戻り値はない為、execSQL()が使用可能
-        //変数を生で叩き込まないこと(''で囲まないとエラーの原因になる)
-        String sql =
-                "insert into users (" +
-                "id," +
-                "name, " +
-                "address, " +
-                "tel, " +
-                "customer_signature, "+
-                "created_at) " +
-                "values (" +
-                registNumber + ", " +
-                "'" + registName + "'," +
-                "'" + registAdd + "'," +
-                "'" + registTel + "'," +
-                "'" + registRegion + "'," +
-                "'" + registAt + "'" +
-                ")";
-
-        sqliteDatabase.execSQL(sql);
-
-        finish();
-
-        //挿入完了を通知するためのトースト
-        Toast.makeText(this, "登録しました！", Toast.LENGTH_SHORT).show();
     }
 
     //入力値が空でないか？
@@ -135,10 +152,6 @@ public class RegistActivity extends AppCompatActivity {
                 registAt.toString().isEmpty()
         ) {
             empty = true;
-
-            System.out.println("入力値が空白であった場合のダイアログを表示する処理を書くこと");
-        } else {
-            System.out.println("DBへの書き込み処理");
         }
 
         return empty;
