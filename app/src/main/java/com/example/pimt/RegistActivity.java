@@ -59,6 +59,7 @@ public class RegistActivity extends AppCompatActivity {
 
     public void write(View view) {
 
+        isEmpty();
 
         //EditTextから入力された文字、数字を受け取るために変数を宣言
         EditText editText_number = findViewById(R.id.editText_number);
@@ -103,10 +104,44 @@ public class RegistActivity extends AppCompatActivity {
 
         sqliteDatabase.execSQL(sql);
 
+        finish();
+
         //挿入完了を通知するためのトースト
         Toast.makeText(this, "登録しました！", Toast.LENGTH_SHORT).show();
+    }
 
-        finish();
+    //入力値が空でないか？
+    public boolean isEmpty() {
+        boolean empty = false;
+
+        EditText editText_name = findViewById(R.id.editText_name);
+        EditText editText_add = findViewById(R.id.editText_add);
+        EditText editText_tel = findViewById(R.id.editText_tel);
+        EditText editText_region = findViewById(R.id.editText_region);
+        EditText editText_at = findViewById(R.id.editText_at);
+
+        String registName = editText_name.getText().toString();
+        String registAdd = editText_add.getText().toString();
+        String registTel = editText_tel.getText().toString();
+        String registRegion = editText_region.getText().toString();
+        String registAt = editText_at.getText().toString();
+
+        //入力値が空だった場合
+        if (
+                registName.toString().isEmpty() ||
+                registAdd.toString().isEmpty() ||
+                registTel.toString().isEmpty() ||
+                registRegion.toString().isEmpty() ||
+                registAt.toString().isEmpty()
+        ) {
+            empty = true;
+
+            System.out.println("入力値が空白であった場合のダイアログを表示する処理を書くこと");
+        } else {
+            System.out.println("DBへの書き込み処理");
+        }
+
+        return empty;
     }
 
     //現在時刻をString型で返すメソッド
