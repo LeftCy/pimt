@@ -90,8 +90,9 @@
         android:layout_weight="1"
         android:autofillHints=""
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="None"
+        android:gravity="center"
+        android:hint="登録番号を入力"
+        android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/editText_nameView"
         app:layout_constraintEnd_toEndOf="@+id/editText_nameView"
         app:layout_constraintTop_toBottomOf="@+id/header_rewrite" />
@@ -102,6 +103,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:gravity="center"
+        android:hint="氏名を入力"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editText_addView"
         app:layout_constraintEnd_toEndOf="@+id/editText_addView"
@@ -113,7 +116,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:gravity="center"
+        android:hint="住所を入力"
+        android:inputType="textPostalAddress"
         app:layout_constraintBottom_toTopOf="@+id/editText_telView"
         app:layout_constraintEnd_toEndOf="@+id/editText_telView"
         app:layout_constraintTop_toBottomOf="@+id/editText_nameView" />
@@ -124,7 +129,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:gravity="center"
+        android:inputType="phone"
+        android:hint="番号を入力"
         app:layout_constraintBottom_toTopOf="@+id/editText_regionView"
         app:layout_constraintEnd_toEndOf="@+id/editText_regionView"
         app:layout_constraintTop_toBottomOf="@+id/editText_addView" />
@@ -135,7 +142,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:gravity="center"
+        android:inputType="text"
+        android:hint="部署名を入力"
         app:layout_constraintBottom_toTopOf="@+id/editText_atView"
         app:layout_constraintEnd_toEndOf="@+id/editText_atView"
         app:layout_constraintTop_toBottomOf="@+id/editText_telView" />
@@ -146,7 +155,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:gravity="center"
+        android:focusable="false"
+        android:inputType="datetime"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -173,6 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
+            android:onClick="returnButton"
             android:text="@string/return_button" />
 
         <Button
